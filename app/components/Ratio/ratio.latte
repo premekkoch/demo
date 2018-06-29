@@ -1,0 +1,19 @@
+<div class="row mt-5">
+    <h2>Ratios</h2>
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <td n:foreach="$ratios as $ratio">Class <b>{$ratio->name}</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td n:foreach="$ratios as $ratio">
+                    <span class="badge badge-primary" title="Males">{$ratio->maleRatio|number:2} %</span>
+                    &nbsp;
+                    <span class="badge badge-danger" title="Females">{$ratio->femaleRatio|number:2} %</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

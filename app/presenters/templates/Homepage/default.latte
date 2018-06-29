@@ -1,0 +1,39 @@
+{block content}
+<div class="row mt-5">
+    <div class="col">
+        <h1 n:inner-block="title">Students</h1>
+        <p>
+            <a n:href="Homepage:default">All</a> |
+            <a n:href="Homepage:default, 'gender' => App\Orm\Student::GENDER_MALE">Males</a> |
+            <a n:href="Homepage:default, 'gender' => App\Orm\Student::GENDER_FEMALE">Females</a> |
+            <span n:foreach="$classrooms as $classroom"> <a n:href="Homepage:default, 'classroomId' => $classroom->id">{$classroom->name}</a> |</span>
+        </p>
+    </div>
+</div>
+{snippet table}
+    <div class="row">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Classroom</th>
+                    <th>Student name</th>
+                    <th>Gender</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr n:foreach="$students as $student">
+                        <td>{$student->classroom->name}</td>
+                        <td>{$student->name}</td>
+                        <td>{$student->gender === App\Orm\Student::GENDER_MALE ? 'male' : 'female' }</td>
+                        <td>
+                            <a n:href="edit $student->id" class="btn btn-dark btn-sm">Edit</a>
+                            <a n:href="delete! $student->id" class="ajax btn btn-danger btn-sm" data-confirm="Really delete a student?">Delete</a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <a n:href="Homepage:new" class="btn btn-primary active" role="button">New student</a>
+    </div>
+    {control ratio}
+{/snippet}
